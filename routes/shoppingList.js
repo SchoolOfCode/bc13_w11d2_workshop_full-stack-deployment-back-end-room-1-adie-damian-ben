@@ -15,10 +15,11 @@ router.post("/", async (req, res) => {
   res.status(201).json({ success: true, payload: result });
 });
 
-router.patch("/", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   const { listItem } = req.body;
-  const result = await completeItem(listItem);
+  const result = await completeItem(req.params.id);
   res.status(201).json({ success: true, payload: result });
+  console.log(result)
 })
 
 export default router;

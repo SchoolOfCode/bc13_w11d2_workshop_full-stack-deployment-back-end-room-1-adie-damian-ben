@@ -19,13 +19,12 @@ export async function postListItem(listItem) {
 }
 
 export async function completeItem(listItem) {
-  const { id } = listItem;
   const data = await pool.query(
     `UPDATE shopping
     SET completed = NOT completed
     WHERE id = ($1) 
     RETURNING *;`,
-    [id]
+    [listItem]
   );
   return data.rows[0]
 }
