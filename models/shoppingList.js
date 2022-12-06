@@ -17,3 +17,15 @@ export async function postListItem(listItem) {
   );
   return data.rows[0];
 }
+
+export async function completeItem(listItem) {
+  const { id } = listItem;
+  const data = await pool.query(
+    `UPDATE shopping
+    SET completed = NOT completed
+    WHERE id = ($1) 
+    RETURNING *;`,
+    [id]
+  );
+  return data.rows[0]
+}
